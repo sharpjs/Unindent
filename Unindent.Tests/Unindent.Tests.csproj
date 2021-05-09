@@ -25,4 +25,8 @@
     <ProjectReference Include="..\Unindent\Unindent.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Subatomix.Testing" Version="1.1.3" />
+  </ItemGroup>
+
 </Project>
