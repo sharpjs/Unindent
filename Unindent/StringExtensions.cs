@@ -47,7 +47,7 @@ namespace Unindent
                 return s.Substring(0, limit);
 
             // Build unindented string
-            return s.UnindentCore(limit, indent, count, tabStop);
+            return s.UnindentCore(limit, indent, tabStop);
         }
 
         private static (int, int) GetIndentWidthAndCount(
@@ -99,11 +99,10 @@ namespace Unindent
             this string s,
             int         limit,
             int         indent,
-            int         count,
             int         tabStop)
         {
             var index  = 0;
-            var result = new StringBuilder(limit - indent * count);
+            var result = new StringBuilder(limit);
 
             do
             {
