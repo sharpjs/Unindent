@@ -42,71 +42,126 @@ namespace Unindent.Tests
         [Test]
         public void Unindent_Empty_TrailingSpace()
         {
-            AssertUnindent(
-                "   ",
-                ""
-            );
+            AssertUnindent(" \t", "");
         }
 
         [Test]
-        public void Unindent_OneLine()
+        public void Unindent_NonEmpty_NonIndented()
         {
-            AssertUnindentReturnsSame("abc");
+            AssertUnindentReturnsSame("ab");
         }
 
         [Test]
-        public void Unindent_OneLine_TrailingSpace()
+        public void Unindent_NonEmpty_Indented()
         {
-            AssertUnindent(
-                "abc  ",
-                "abc"
-            );
+            AssertUnindent(" \tab \t ", "ab");
         }
 
         [Test]
-        public void Unindent_MultiLines()
+        public void Unindent_OneLine_NonIndented()
         {
-            AssertUnindent(
+            AssertUnindentReturnsSame(
                 Lines(
-                    "",
-                    "    abc",
-                    "",
-                    "   def",
-                    ""
-                ),
-                Lines(
-                    "",
-                    " abc",
-                    "",
-                    "def",
+                    "ab",
                     ""
                 )
             );
         }
 
         [Test]
-        public void Unindent_MultiLines_EmptyLinesHaveSpace()
+        public void Unindent_OneLine_Indented()
         {
             AssertUnindent(
                 Lines(
-                    "     ",
-                    "    abc",
-                    "    ",
-                    "   def",
-                    "    "
+                    "\t ab",
+                    "\t  "
                 ),
                 Lines(
-                    "  ",
-                    " abc",
-                    " ",
-                    "def",
-                    "" // <-- trailing space always removed
+                    "ab",
+                    ""
                 )
             );
         }
 
         [Test]
-        public void Unindent_Tabs_DefaultTabStop()
+        public void Unindent_MultiLine_NonIndented()
+        {
+            AssertUnindentReturnsSame(
+                Lines(
+                    "",
+                    "",
+                    "ab",
+                    "",
+                    "",
+                    "de",
+                    ""
+                )
+            );
+        }
+
+        [Test]
+        public void Unindent_MultiLine_Indented()
+        {
+            AssertUnindent(
+                Lines(
+                    "\t ",
+                    "\t ab",
+                    "\t   de",
+                    "\t "
+                ),
+                Lines(
+                    "",
+                    "ab",
+                    "  de",
+                    ""
+                )
+            );
+        }
+
+        [Test]
+        public void Unindent_MultiLine_Indented_EarlyEol()
+        {
+            AssertUnindent(
+                Lines(
+                    "",         // <-- early EOL
+                    "\t   ab",
+                    "\t",       // <-- early EOL
+                    " ",        // <-- early EOL
+                    "\t de",
+                    ""
+                ),
+                Lines(
+                    "",         // <-- all space removed
+                    "  ab",
+                    "",         // <-- all space removed
+                    "",         // <-- all space removed
+                    "de",
+                    ""
+                )
+            );
+        }
+
+        [Test]
+        public void Unindent_MultiLine_Indented_LateEol()
+        {
+            AssertUnindent(
+                Lines(
+                    "\t   ab",
+                    "\t  \t ",  // <-- late EOL
+                    "\t de",
+                    "\t  \t "   // <-- late EOL
+                ),
+                Lines(
+                    "  ab",
+                    " \t ",     // <-- space after indent preserved
+                    "de",
+                    ""          // <-- trailing space always removed
+                )
+            );
+        }
+
+        [Test]
+        public void Unindent_SpaceTabMix_DefaultTabStop()
         {
             AssertUnindent(
                 Lines(
@@ -126,7 +181,7 @@ namespace Unindent.Tests
         }
 
         [Test]
-        public void Unindent_Tabs_CustomTabStop()
+        public void Unindent_SpaceTabMix_CustomTabStop()
         {
             AssertUnindent(
                 tabStop: 4,
@@ -147,17 +202,17 @@ namespace Unindent.Tests
         }
 
         [Test]
-        public void Unindent_Tabs_AutoTransmuteToSpace()
+        public void Unindent_SpaceTabMix_TabAcrossIndent()
         {
             AssertUnindent(
                 tabStop: 4,
                 Lines(
                 //  "|~~~V---|---|"
-                      "\t(one)",
+                      "\t(one)",    // <-- tab jumps one space past indent
                     "   (two)"
                 ),
                 Lines(
-                    " (one)",
+                    " (one)",       // <-- space added to preserve alignment
                     "(two)"
                 )
             );
