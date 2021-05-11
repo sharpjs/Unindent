@@ -10,11 +10,6 @@ Removes indentation from .NET strings.
 
 Coming soon.
 
-## Installation
-
-<!-- Install the NuGet package. -->
-You can't just yet.
-
 ## Usage
 
 This package provides an `Unindent` extension method for .NET strings.
