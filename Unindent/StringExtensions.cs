@@ -20,8 +20,21 @@ namespace Unindent
         ///   The count of columns between tab stops. Must be a positive number.
         /// </param>
         /// <returns>
-        ///   A string with content of <paramref name="s"/>, but with the
-        ///   greatest common indent removed.
+        ///   <para>
+        ///     A string with content of <paramref name="s"/>, but unindented:
+        ///     the leading space, if any, common to all non-blank lines is
+        ///     removed from each line (blank or not).
+        ///   </para>
+        ///   <para>
+        ///     Space is any mixture of the space (<c>U+0020</c>) and tab
+        ///     (<c>U+0009</c>) characters.  Each tab advances to the next tab
+        ///     stop.  Tab stops are <paramref name="tabStop"/> spaces apart.
+        ///   </para>
+        ///   <para>
+        ///     Lines end via any mixture of the carriage return (<c>U+000D</c>)
+        ///     and line feed (<c>U+000A</c>) characters.  A line is blank if
+        ///     it contains no characters other than spaces or tabs.
+        ///   </para>
         /// </returns>
         /// <exception cref="ArgumentNullException">
         ///   <paramref name="s"/> is <see langword="null"/>.
