@@ -4,6 +4,10 @@ Removes indentation from .NET strings.
 
 ## Status
 
+[![Build Status](https://github.com/sharpjs/Unindent/workflows/Build/badge.svg)](https://github.com/sharpjs/Unindent/actions)
+[![Package Version](https://img.shields.io/nuget/v/Unindent.svg)](https://www.nuget.org/packages/Unindent)
+[![Package Downloads](https://img.shields.io/nuget/dt/Unindent.svg)](https://www.nuget.org/packages/Unindent)
+
 Coming soon.
 
 ## Installation
