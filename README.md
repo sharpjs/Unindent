@@ -1,6 +1,6 @@
 # Unindent
 
-Removes indentation from .NET strings.
+A tiny .NET library that removes indentation from multi-line strings.
 
 ## Status
 
