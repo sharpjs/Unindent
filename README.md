@@ -21,12 +21,12 @@ var result = input.Unindent();
 ```
 
 The `Unindent` method returns a string with the content of the input string,
-but unindented: if all<sup>[1](#blanks)</sup> input lines begin with the same
-amount of space (the *indentation*), that space is removed from the returned
-string.
+but unindented: if all<sup>[1](#blank-lines)</sup> input lines begin with the
+same amount of space (the *indentation*), that space is removed from the
+returned string.
 
 *Space* here means any mixture of the space (`U+0020`) and tab (`U+0009`)
-characters.  Tabs work like in most text editors<sup>[2](#split-tabs)</sup>: a
+characters.  Tabs work like in most text editors:<sup>[2](#split-tabs)</sup> a
 tab advances to the next tab stop.  By default, tab stops are 8 spaces apart.
 The optional `tabStop` parameter overrides the default.
 
@@ -37,15 +37,16 @@ Lines end via any mixture of the carriage return (`U+000D`) and line feed
 <details>
 <summary>Click here for details about some edge cases.</summary>
 
-- <sup><a id="blanks">1</a></sup> Unindent ignores *blank* lines (those
+- <sup><a id="blank-lines">1</a></sup> Unindent ignores *blank* lines (those
   containing only space) when discovering indentation in the input string, but
   the method still removes indentation from blank lines that have it.  See
   [this test](https://github.com/sharpjs/Unindent/blob/4bad5c2249c4e4a4a4976ede12799e0d825bca61/Unindent.Tests/StringExtensionsTests.cs#L155-L158)
   for an example.
 
-- <sup><a id="blanks">2</a></sup> If a tab character jumps past the computed
-  indentation width, that tab is replaced by space characters in order to
-  preserve column alignments present in the input string.  See [this test](https://github.com/sharpjs/Unindent/blob/4bad5c2249c4e4a4a4976ede12799e0d825bca61/Unindent.Tests/StringExtensionsTests.cs#L215)
+- <sup><a id="split-tabs">2</a></sup> If a tab character jumps past the
+  computed indentation width, that tab is replaced by space characters in order
+  to preserve column alignments present in the input string.  See
+  [this test](https://github.com/sharpjs/Unindent/blob/4bad5c2249c4e4a4a4976ede12799e0d825bca61/Unindent.Tests/StringExtensionsTests.cs#L215)
   for an example.
 
 - If the input string ends with trailing space, Unindent removes that space.
