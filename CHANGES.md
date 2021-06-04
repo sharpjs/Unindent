@@ -10,9 +10,7 @@ Most lines should begin with one of these words:
 
 ## [1.0.1](https://github.com/sharpjs/Unindent/compare/release/1.0.0..release/1.0.1)
 Future release.
+-->
 
 ## [1.0.0](https://github.com/sharpjs/Unindent/tree/release/1.0.0)
 Initial release.
--->
-
-**No releases yet.**
