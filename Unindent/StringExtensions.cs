@@ -17,23 +17,29 @@ namespace Unindent
         ///   The string from which to remove indentation.
         /// </param>
         /// <param name="tabStop">
-        ///   The count of columns between tab stops. Must be a positive number.
+        ///   The count of columns between tab stops.  Must be a positive
+        ///   number.
         /// </param>
         /// <returns>
         ///   <para>
         ///     A string with content of <paramref name="s"/>, but unindented:
         ///     the leading space, if any, common to all non-blank lines is
-        ///     removed from each line (blank or not).
+        ///     removed from all lines (blank or not).  If <paramref name="s"/>
+        ///     ends with trailing space, this method removes it.
         ///   </para>
         ///   <para>
-        ///     Space is any mixture of the space (<c>U+0020</c>) and tab
-        ///     (<c>U+0009</c>) characters.  Each tab advances to the next tab
-        ///     stop.  Tab stops are <paramref name="tabStop"/> spaces apart.
+        ///     <em>Space</em> is any mixture of the space (<c>U+0020</c>) and
+        ///     tab (<c>U+0009</c>) characters.  Each tab advances to the next
+        ///     tab stop.  Tab stops are <paramref name="tabStop"/> spaces
+        ///     apart.  If a tab in <paramref name="s"/> jumps past the
+        ///     indentation, this method replaces the tab with spaces to
+        ///     preserve alignment.
         ///   </para>
         ///   <para>
-        ///     Lines end via any mixture of the carriage return (<c>U+000D</c>)
-        ///     and line feed (<c>U+000A</c>) characters.  A line is blank if
-        ///     it contains no characters other than spaces or tabs.
+        ///     Lines end via any mixture of the carriage return
+        ///     (<c>U+000D</c>) and line feed (<c>U+000A</c>) characters.  A
+        ///     line is <em>blank</em> if it contains no characters other than
+        ///     spaces or tabs.
         ///   </para>
         /// </returns>
         /// <exception cref="ArgumentNullException">
