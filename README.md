@@ -8,7 +8,9 @@ Removes indentation from .NET strings.
 [![Package Version](https://img.shields.io/nuget/v/Unindent.svg)](https://www.nuget.org/packages/Unindent)
 [![Package Downloads](https://img.shields.io/nuget/dt/Unindent.svg)](https://www.nuget.org/packages/Unindent)
 
-Coming soon.
+Test coverage is 100%.
+
+Unindent is available as a [NuGet package](https://www.nuget.org/packages/Unindent).
 
 ## Usage
 
@@ -19,17 +21,39 @@ var result = input.Unindent();
 ```
 
 The `Unindent` method returns a string with the content of the input string,
-but unindented: the leading space, if any, common to all non-blank lines is
-removed from each line (blank or not).
+but unindented: if all<sup>[1](#blanks)</sup> input lines begin with the same
+amount of space (the *indentation*), that space is removed from the returned
+string.
 
-Space is any mixture of the space (`U+0020`) and tab (`U+0009`) characters.
-Each tab advances to the next tab stop.  By default, tab stops are 8 spaces
-apart.  The `tabStop` parameter overrides this default.
+*Space* here means any mixture of the space (`U+0020`) and tab (`U+0009`)
+characters.  Tabs work like in most text editors<sup>[2](#split-tabs)</sup>: a
+tab advances to the next tab stop.  By default, tab stops are 8 spaces apart.
+The optional `tabStop` parameter overrides the default.
 
 Lines end via any mixture of the carriage return (`U+000D`) and line feed
 (`U+000A`) characters.  Thus Unindent supports `CR+LF` (Windows), `LF`
-(Linux/Unix), and `CR` (classic MacOS) line endings.  A line is blank if it
-contains no characters other than spaces or tabs.
+(Linux/Unix), and `CR` (classic MacOS) line endings.
+
+<details>
+<summary>Click here for details about some edge cases.</summary>
+
+- <sup><a id="blanks">1</a></sup> Unindent ignores *blank* lines (those
+  containing only space) when discovering indentation in the input string, but
+  the method still removes indentation from blank lines that have it.  See
+  [this test](https://github.com/sharpjs/Unindent/blob/4bad5c2249c4e4a4a4976ede12799e0d825bca61/Unindent.Tests/StringExtensionsTests.cs#L155-L158)
+  for an example.
+
+- <sup><a id="blanks">2</a></sup> If a tab character jumps past the computed
+  indentation width, that tab is replaced by space characters in order to
+  preserve column alignments present in the input string.  See
+  [this test](https://github.com/sharpjs/Unindent/blob/4bad5c2249c4e4a4a4976ede12799e0d825bca61/Unindent.Tests/StringExtensionsTests.cs#L215)
+  for an example.
+
+- Unindent removes all trailing space from the input string.  See
+  [this test](https://github.com/sharpjs/Unindent/blob/4bad5c2249c4e4a4a4976ede12799e0d825bca61/Unindent.Tests/StringExtensionsTests.cs#L155-L158)
+  for an example.
+
+</details>
 
 ### Example
 
