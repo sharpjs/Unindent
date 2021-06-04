@@ -45,12 +45,11 @@ Lines end via any mixture of the carriage return (`U+000D`) and line feed
 
 - <sup><a id="blanks">2</a></sup> If a tab character jumps past the computed
   indentation width, that tab is replaced by space characters in order to
-  preserve column alignments present in the input string.  See
-  [this test](https://github.com/sharpjs/Unindent/blob/4bad5c2249c4e4a4a4976ede12799e0d825bca61/Unindent.Tests/StringExtensionsTests.cs#L215)
+  preserve column alignments present in the input string.  See [this test](https://github.com/sharpjs/Unindent/blob/4bad5c2249c4e4a4a4976ede12799e0d825bca61/Unindent.Tests/StringExtensionsTests.cs#L215)
   for an example.
 
-- Unindent removes all trailing space from the input string.  See
-  [this test](https://github.com/sharpjs/Unindent/blob/4bad5c2249c4e4a4a4976ede12799e0d825bca61/Unindent.Tests/StringExtensionsTests.cs#L155-L158)
+- If the input string ends with trailing space, Unindent removes that space.
+  See [this test](https://github.com/sharpjs/Unindent/blob/4bad5c2249c4e4a4a4976ede12799e0d825bca61/Unindent.Tests/StringExtensionsTests.cs#L155-L158)
   for an example.
 
 </details>
