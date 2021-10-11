@@ -19,6 +19,7 @@
   <PropertyGroup>
     <Description>Removes indentation from multi-line strings.</Description>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
 </Project>

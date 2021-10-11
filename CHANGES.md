@@ -12,5 +12,8 @@ Most lines should begin with one of these words:
 Future release.
 -->
 
+## [1.0.1](https://github.com/sharpjs/Unindent/compare/release/1.0.0..release/1.0.1)
+- Fix missing documentation.
+
 ## [1.0.0](https://github.com/sharpjs/Unindent/tree/release/1.0.0)
 Initial release.
