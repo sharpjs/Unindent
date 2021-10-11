@@ -24,8 +24,9 @@ namespace Unindent
         ///   <para>
         ///     A string with content of <paramref name="s"/>, but unindented:
         ///     the leading space, if any, common to all non-blank lines is
-        ///     removed from all lines (blank or not).  If <paramref name="s"/>
-        ///     ends with trailing space, this method removes that space.
+        ///     removed from all lines (blank or not).  This method also
+        ///     removes one leading line-ending and all trailing space from 
+        ///     <paramref name="s"/>, if present.
         ///   </para>
         ///   <para>
         ///     <em>Space</em> is any mixture of the space (<c>U+0020</c>) and
