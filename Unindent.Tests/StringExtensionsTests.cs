@@ -40,6 +40,12 @@ namespace Unindent.Tests
         }
 
         [Test]
+        public void Unindent_Empty_LeadingEol()
+        {
+            AssertUnindent(Lines("", ""), "");
+        }
+
+        [Test]
         public void Unindent_Empty_TrailingSpace()
         {
             AssertUnindent(" \t", "");
@@ -86,9 +92,17 @@ namespace Unindent.Tests
         [Test]
         public void Unindent_MultiLine_NonIndented()
         {
-            AssertUnindentReturnsSame(
+            AssertUnindent(
                 Lines(
+                    "",         // <-- leading EOL (will be removed)
                     "",
+                    "ab",
+                    "",
+                    "",
+                    "de",
+                    ""
+                ),
+                Lines(
                     "",
                     "ab",
                     "",
@@ -104,6 +118,7 @@ namespace Unindent.Tests
         {
             AssertUnindent(
                 Lines(
+                    "",         //  <-- leading EOL (will be removed)
                     "\t ",
                     "\t ab",
                     "\t   de",
@@ -123,6 +138,7 @@ namespace Unindent.Tests
         {
             AssertUnindent(
                 Lines(
+                    "",         // <-- leading EOL (will be removed)
                     "",         // <-- early EOL
                     "\t   ab",
                     "\t",       // <-- early EOL

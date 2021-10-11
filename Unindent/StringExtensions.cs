@@ -55,26 +55,27 @@ namespace Unindent
             if (tabStop < 1)
                 throw new ArgumentOutOfRangeException(nameof(tabStop));
 
-            // Ignore trailing space
+            // Ignore one leading EOL and any trailing space
+            var start = s.LengthOfLeadingEol();
             var limit = s.LengthExcludingTrailingSpace();
 
             // Compute indent width and count
-            var (indent, count) = s.GetIndentWidthAndCount(limit, tabStop);
+            var (indent, count) = s.GetIndentWidthAndCount(start, limit, tabStop);
 
             // Shortcut for simple cases
             if (indent == 0 || count == 0)
-                return s.Substring(0, limit);
+                return s.Substring(start, limit - start);
 
             // Build unindented string
-            return s.UnindentCore(limit, indent, tabStop);
+            return s.UnindentCore(start, limit, indent, tabStop);
         }
 
         private static (int, int) GetIndentWidthAndCount(
             this string s,
+            int         index,
             int         limit,
             int         tabStop)
         {
-            var index  = 0;             // string index
             var column = 0;             // column offset from BOL
             var indent = int.MaxValue;  // width of one indent
             var count  = 0;             // count of indents
@@ -116,12 +117,12 @@ namespace Unindent
 
         private static string UnindentCore(
             this string s,
+            int         index,
             int         limit,
             int         indent,
             int         tabStop)
         {
-            var index  = 0;
-            var result = new StringBuilder(limit);
+            var result = new StringBuilder(limit - index);
 
             do
             {
@@ -197,6 +198,28 @@ namespace Unindent
             result.Append(s, index, bol - index);
 
             return bol;
+        }
+
+        private static int LengthOfLeadingEol(this string s)
+        {
+            if (s.Length == 0)
+                return 0;
+
+            switch (s[0])
+            {
+                case '\r': break; // 1 or 2
+                case '\n': return 1;
+                default:   return 0;
+            }
+
+            if (s.Length == 1)
+                return 1;
+
+            switch (s[1])
+            {
+                case '\n': return 2;
+                default:   return 1;
+            }
         }
 
         private static int LengthExcludingTrailingSpace(this string s)
