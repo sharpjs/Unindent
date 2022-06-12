@@ -42,6 +42,7 @@
   <!-- Build properties -->
   <PropertyGroup>
     <LangVersion>10</LangVersion>
+    <ImplicitUsings>true</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
