@@ -10,6 +10,8 @@ Most lines should begin with one of these words:
 -->
 
 ## [1.1.1](https://github.com/sharpjs/Unindent/compare/release/1.1.0..release/1.1.1)
+- Fix packaging issues:
+  - Enable deterministic build.
 
 ## [1.1.0](https://github.com/sharpjs/Unindent/compare/release/1.0.0..release/1.1.0)
 - Add leading newline removal.  `Unindent` will remove one leading newline, if
