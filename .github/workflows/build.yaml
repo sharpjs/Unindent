@@ -1,7 +1,7 @@
 # GitHub Actions workflow
 # https://help.github.com/en/actions/reference
 #
-# Copyright 2021 Jeffrey Sharp
+# Copyright 2022 Jeffrey Sharp
 #
 # Permission to use, copy, modify, and distribute this software for any
 # purpose with or without fee is hereby granted, provided that the above
@@ -28,6 +28,8 @@ on:
     branches:
       - main
       - release/*
+  workflow_dispatch:
+    # no options
 
 env:
   # Minimize noise from dotnet CLI
@@ -61,6 +63,7 @@ jobs:
         run: >
           dotnet build .root.targets -c Release
           -p:StampOnBuild=true
+          -p:SetGitHubActionsVersion=true
           -p:Branch=${{ github.ref }}
           -p:Counter=${{ github.run_number }}
           -p:RepositoryCommit=${{ github.sha }}
@@ -71,6 +74,7 @@ jobs:
       - name: Build
         run: >
           dotnet build --no-restore -c Release
+          -p:TreatWarningsAsErrors=true
           -p:PackageOutputPath=${{ runner.temp }}\dist
 
       - name: Test
@@ -85,7 +89,7 @@ jobs:
         with:
           reports: ${{ runner.temp }}\coverage\raw\**\coverage.opencover.xml
           targetdir: ${{ runner.temp }}\coverage
-          reporttypes: Cobertura;HtmlInline;Badges;TeamCitySummary
+          reporttypes: Cobertura;JsonSummary;Html_Dark;Badges
           verbosity: Warning
 
       - name: Save Coverage Report
