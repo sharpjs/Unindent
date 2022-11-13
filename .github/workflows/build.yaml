@@ -45,11 +45,11 @@ jobs:
 
     steps:
       - name: Check Out Code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         #url: https://github.com/actions/checkout
 
-      - name: Configure .NET 6.0
-        uses: actions/setup-dotnet@v1
+      - name: Configure .NET
+        uses: actions/setup-dotnet@v3
         #url: https://github.com/actions/setup-dotnet
         with:
           dotnet-version: 6.0.x
@@ -89,7 +89,7 @@ jobs:
           verbosity: Warning
 
       - name: Save Coverage Report
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         #url: https://github.com/actions/upload-artifact
         with:
           name: Coverage Report
@@ -97,7 +97,7 @@ jobs:
           if-no-files-found: error
 
       - name: Save Package
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         #url: https://github.com/actions/upload-artifact
         with:
           name: Packages
