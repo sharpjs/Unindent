@@ -24,10 +24,16 @@
     <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
     <IsPublishable>false</IsPublishable>
     <IsPackable>false</IsPackable>
+    <DefaultItemExcludesInProjectFolder>
+      Unindent*\**;
+      coverage\**;
+      dist\**;
+      $(DefaultItemExcludesInProjectFolder)
+    </DefaultItemExcludesInProjectFolder>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="**" Exclude="Unindent*\**;dist\**;coverage\**;$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder);$(MSBuildThisFile)" />
+    <None Include="**"    Exclude="$(DefaultItemExcludes);$(DefaultExcludesInProjectFolder);$(MSBuildThisFile)" />
     <None Include=".*\**" Exclude=".git\**;.vs\**" />
   </ItemGroup>
 
